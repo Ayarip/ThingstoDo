@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="jumbotron">
+        <h1>Things to do</h1>
+        <div class="formgroup">
+            <label for="my-input">¿What's going to do?</label>
+            <div [formGroup]="formulario" class="input-group mb-3">
+                    <input type="text" formControlName="thing" class="form-control" placeholder="Write your homework" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <div class="input-group-append">
+                      <button (click)="obtenerthing()" *ngIf="formulario.valid" class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+                    </div>
+                  </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-striped table-inverse text-center">
+                    <thead>
+                        <tr>
+                            <th>Task</th>
+                            <th>Date create</th>
+                            <th>Change status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let thing of things">
+                            <td scope="row">{{thing.thing}}</td>
+                            <td>{{thing.created_date|date:'dd-MM-yyyy'}}</td>
+                            <td>
+                                <button type="button" class="btn"
+                                [ngClass]="{'btn-outline-success': thing.complete,
+                                'btn-outline-danger':!thing.complete}"
+                                ><span *ngIf="!thing.complete" (click)="cambiarstatus(thing)">Finish homework?</span>
+                                <span *ngIf="thing.complete">Homework finished</span>
+                            </button>
+                        <button type="button" (click)="eliminartarea(thing._id)" name="" id="" class="btn btn-outline-dark ml-2">Delte homework?</button>
+                        </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
